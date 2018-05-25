@@ -1,30 +1,22 @@
 package com.nerosong.navigationdemo;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.nerosong.navigationdemo.util.CircleProgress;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
 
     private BottomNavigationView navigation;
     private ViewPager viewPager;
+    CircleProgress mCircleProgress1;
 
     private Fragment1 fragment1 = new Fragment1();
     private Fragment2 fragment2 = new Fragment2();
@@ -32,11 +24,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     public static MainActivity mMainAcitvity;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        SDKInitializer.initialize(getApplicationContext());
+        SDKInitializer.initialize(getApplicationContext());
 
         setContentView(R.layout.activity_main);
 
@@ -46,6 +39,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     }
 
+    public void ppp(){
+        mCircleProgress1 = (CircleProgress) findViewById(R.id.circle_progress_bar1);
+        mCircleProgress1.setValue(100);
+
+    }
 
     private void initViewPager(){
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -87,6 +85,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             //menu/navigation.xml里加的android:orderInCategory属性就是下面item.getOrder()取的值
             viewPager.setCurrentItem(item.getOrder());
 
+
+            if(item.getItemId()==1){
+                mCircleProgress1 = (CircleProgress) findViewById(R.id.circle_progress_bar1);
+                mCircleProgress1.setValue(100);
+
+            }
+
             return true;
         }
 
@@ -108,5 +113,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public void onPageScrollStateChanged(int state) {
 
     }
+
 
 }
